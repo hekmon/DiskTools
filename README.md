@@ -9,12 +9,12 @@ It is for now composed of :
 
 ## GPTinitialize
 
-GPTinitialize prepare a disk with a GPT partitonning schema for a dual compatibility between BIOS and UEFI. Once initialized, the disk can be used in both boot mode as long as the 2 specials partitions are on the disk.
+GPTinitialize prepare a disk with a GPT partitonning schema for a dual compatibility between BIOS and UEFI. Once initialized, the disk can be used in both boot mode as long as the 2 specials partitions are still on the disk.
 
 It :
 * Initializes the disk as GPT (and yes that means __loss of data__)
-* Creates a special partition for BIOS boot (in GPT there is no more unused MBR free space and boot loaders need one)
-* Creates a UEFI partition with the right formating (FAT32) and flags (boot) in order to be used in a UEFI boot mode
+* Creates a special partition for BIOS boot compatibility (in GPT there is no more unused MBR free space and boot loaders need one)
+* Creates a UEFI partition with the right formating (FAT32) and flags (mainly boot) in order to be used in a UEFI boot mode
 
 ### Requirements
 
@@ -23,8 +23,8 @@ In order to work properly, the following binaries should be available on your sy
 * `bash` obviously  :)
 * `parted` for printing partition tables, partitioning and tagging
 * `partprobe` to update udev in order to properly see the partitions as block devices files just after being created
-* `dd` to "format" the BIOS partition which should be in RAW format (zeroed)
-* `mkfs.fat` to format the UEFI partition which should be in FAT32
+* `dd` to "format" the BIOS partition as it should be in RAW format (zeroed)
+* `mkfs.fat` to format the UEFI partition as it should be in FAT32
 
 
 ### Example
@@ -99,11 +99,11 @@ To keep the partitions aligned in most cases, I had to set some hard values in t
 
 But using [optimalAlignment](https://github.com/Hekmon/DiskTools#optimalalignment) and with little calculations, you should be able to adapt it to your needs as you only need to change two variables : `bios_part_sectors_start` and `uefi_part_sectors_start`.
 
-Ho and if you are wondering how to check your disk sector size, just keep on reading.
+Ho, and if you are wondering how to check your disk sector size, just keep on reading.
 
 ## optimalAlignment
 
-optimalAlignment helps you to keep your partitions aligned depending on your disk sector size.
+optimalAlignment helps you keep your partitions aligned depending on your disk sector size.
 
 It gives you the sector multiple to use for every partition start. It can also compute the next sector you should use for a new partition by using the last sector used (check example 2).
 
@@ -127,7 +127,7 @@ DiskTools>
 
 ### Example 2
 
-But you can pass a second argument to optimalAlignment : the sector number of your last partition in order to compute the sector number to use for your next partition in order to make it aligned.
+You can also pass a second argument to optimalAlignment : the sector number of your last partition in order to compute the sector number to use for your next partition in order to make it aligned.
 
 Let's use the disk we initialized in the [GPTinitialize](https://github.com/Hekmon/DiskTools#gptinitialize) part :
 
@@ -169,7 +169,7 @@ DiskTools>
 
 The script will compute the next sector safe to be used for a new aligned partition by taking into account your disk particularities : `1056768`.
 
-In this case it is the sector just after the last one used, but this is because I made sure that [GPTinitialize](https://github.com/Hekmon/DiskTools#gptinitialize) creates very precise partitions bounderies and wastes no space (at least for 512/4096 scenarios) : it won't always be the case for other partitions so don't assume a simple `+1` !
+In this case it is the sector just after the last one used, but this is because I made sure that [GPTinitialize](https://github.com/Hekmon/DiskTools#gptinitialize) creates very precise partitions bounderies and wastes no space (at least for 512/4096 scenarios) : it won't always be the case for other partitions so don't assume a simple `+1` for every cases !
 
 
 ## License
