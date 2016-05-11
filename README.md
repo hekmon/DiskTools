@@ -3,8 +3,8 @@
 DiskTools is a small collection of bash scripts I wrote for tasks I was tired of doing manually.
 
 It is for now composed of :
-* [GPTinitialize](https://github.com/Hekmon/DiskTools)
-* [optimalAlignment](https://github.com/Hekmon/DiskTools)
+* [GPTinitialize](https://github.com/Hekmon/DiskTools#gptinitialize)
+* [optimalAlignment](https://github.com/Hekmon/DiskTools#optimalalignment)
 
 
 ## GPTinitialize
@@ -91,13 +91,13 @@ Number  Start   End     Size    File system  Name       Flags
 DiskTools>
 ```
 
-As you can seen in the end, disk is in `GPT` and has abilities to be used as a boot disk in both `msdos` or `GPT` mode. You are now free to add whatever partitions you need, but I recommand you check [optimalAlignment](https://github.com/Hekmon/DiskTools) in order to do so ;)
+As you can seen in the end, disk is in `GPT` and has abilities to be used as a boot disk in both `msdos` or `GPT` mode. You are now free to add whatever partitions you need, but I recommand you check [optimalAlignment](https://github.com/Hekmon/DiskTools#optimalalignment) in order to do so ;)
 
 ### Limitations
 
 To keep the partitions aligned in most cases, I had to set some hard values in the script. It will work as long as your disk has `sector size >= 512B`. If not, you will have a nice error message.
 
-But using [optimalAlignment](https://github.com/Hekmon/DiskTools) and with little calculations, you should be able to adapt it to your needs as you only need to change two variables : `bios_part_sectors_start` and `uefi_part_sectors_start`.
+But using [optimalAlignment](https://github.com/Hekmon/DiskTools#optimalalignment) and with little calculations, you should be able to adapt it to your needs as you only need to change two variables : `bios_part_sectors_start` and `uefi_part_sectors_start`.
 
 Ho and if you are wondering how to check your disk sector size, just keep on reading.
 
@@ -129,7 +129,7 @@ DiskTools>
 
 But you can pass a second argument to optimalAlignment : the sector number of your last partition in order to compute the sector number to use for your next partition in order to make it aligned.
 
-Let's use the disk we initialized in the [GPTinitialize](https://github.com/Hekmon/DiskTools) part :
+Let's use the disk we initialized in the [GPTinitialize](https://github.com/Hekmon/DiskTools#gptinitialize) part :
 
 ```
 DiskTools> sudo parted /dev/sdb u s print free
@@ -169,7 +169,7 @@ DiskTools>
 
 The script will compute the next sector safe to be used for a new aligned partition by taking into account your disk particularities : `1056768`.
 
-In this case it is the sector just after the last one used, but this is because I made sure that [GPTinitialize](https://github.com/Hekmon/DiskTools) creates very precise partitions bounderies and wastes no space (at least for 512/4096 scenarios) : it won't always be the case for other partitions so don't assume a simple `+1` !
+In this case it is the sector just after the last one used, but this is because I made sure that [GPTinitialize](https://github.com/Hekmon/DiskTools#gptinitialize) creates very precise partitions bounderies and wastes no space (at least for 512/4096 scenarios) : it won't always be the case for other partitions so don't assume a simple `+1` !
 
 
 ## License
