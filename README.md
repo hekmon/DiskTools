@@ -24,7 +24,7 @@ In order to work properly, the following binaries should be available on your sy
 * `parted` for printing partition tables, partitioning and tagging
 * `partprobe` to update udev in order to properly see the partitions as block devices files just after being created
 * `dd` to "format" the BIOS partition as it should be in RAW format (zeroed)
-* `mkfs.fat` to format the UEFI partition as it should be in FAT32
+* `dosfstools` to format the UEFI partition as it should be in FAT32
 
 
 ### Example
