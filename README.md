@@ -24,8 +24,13 @@ In order to work properly, the following binaries should be available on your sy
 * `parted` for printing partition tables, partitioning and tagging
 * `partprobe` to update udev in order to properly see the partitions as block devices files just after being created
 * `dd` to "format" the BIOS partition as it should be in RAW format (zeroed)
-* `dosfstools` to format the UEFI partition as it should be in FAT32
+* `mkfs.fat` to format the UEFI partition as it should be in FAT32
 
+On Debian you will need the following packages :
+* `bash` to use ? `bash`
+* `parted` to use `parted` and `partprobe`
+* `coreutils` to use `dd`
+* `dosfstools` to use `mkfs.fat`
 
 ### Example
 
