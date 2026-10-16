@@ -27,7 +27,7 @@ In order to work properly, the following binaries should be available on your sy
 * `mkfs.fat` to format the UEFI partition as it should be in FAT32
 
 On Debian you will need the following packages :
-* `bash` to use ? `bash`
+* `bash` to run the script
 * `parted` to use `parted` and `partprobe`
 * `coreutils` to use `dd`
 * `dosfstools` to use `mkfs.fat`
